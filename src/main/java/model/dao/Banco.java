@@ -8,11 +8,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
-//Alterei localmente mais uma vez
-
-//Alterei localmente -> mexi depois remotamente (user Github)
-
-//Versão final pós resolução de conflitos
 /**
  * Classe criada na disciplina de POO (2019/1).
  * 
