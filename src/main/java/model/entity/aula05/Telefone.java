@@ -9,6 +9,10 @@ public class Telefone {
 	private String tipoLinha;
 	private boolean ativo;
 
+	public Telefone() {
+		
+	}
+	
 	public Telefone(int id, int idCliente, String codigoPais, String ddd, String numero, String tipoLinha,
 			boolean ativo) {
 		super();
