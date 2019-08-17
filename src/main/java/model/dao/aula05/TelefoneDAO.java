@@ -40,7 +40,6 @@ public class TelefoneDAO implements BaseDAO<Telefone> {
 				int idGerado = generatedKeys.getInt(1);
 				novoTelefone.setId(idGerado);
 			}
-			
 		} catch (SQLException e) {
 			System.out.println("Erro ao inserir novo telefone.");
 			System.out.println("Erro: " + e.getMessage());
@@ -88,7 +87,6 @@ public class TelefoneDAO implements BaseDAO<Telefone> {
 	/**
 	 * Desativa todos os telefones de um determinado cliente.
 	 * @param idCliente a chave primária do cliente
-	 * @return 
 	 */
 	public void desativarTelefones(int idCliente) {
 		Connection conn = Banco.getConnection();
