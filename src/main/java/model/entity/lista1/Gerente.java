@@ -9,6 +9,9 @@ public class Gerente extends Empregado {
 		this.comissao = comissao;
 	}
 
+	public Gerente() {
+	}
+
 	@Override
 	public double calcularSalario() {
 		return this.getSalarioBase() * 0.9 + this.comissao;

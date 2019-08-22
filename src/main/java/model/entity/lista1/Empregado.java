@@ -1,7 +1,7 @@
 package model.entity.lista1;
 
 public abstract class Empregado {
-	
+	private int id;
 	private String nome;
 	private String cpf;
 	private char sexo;
@@ -10,6 +10,10 @@ public abstract class Empregado {
 	private double descontoImpostoRenda;
 	private double descontoPrevidencia;
 	private double salarioBase;
+	
+	public Empregado() {
+		
+	}
 	
 	public Empregado(String nome, String cpf, char sexo, int idade, double salarioBruto) {
 		super();
@@ -108,5 +112,13 @@ public abstract class Empregado {
 
 	public void setSalarioBase(double salarioBase) {
 		this.salarioBase = salarioBase;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 }

@@ -6,6 +6,9 @@ public class EmpregadoOperacional extends Empregado {
 		super(nome, cpf, sexo, idade, salarioBruto);
 	}
 
+	public EmpregadoOperacional() {
+	}
+
 	@Override
 	public double calcularSalario() {
 		return this.getSalarioBase() * 0.85;
