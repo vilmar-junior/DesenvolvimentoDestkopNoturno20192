@@ -24,8 +24,8 @@ public class EmpregadoDAO implements BaseDAO<Empregado> {
 	public static final String TIPO_EMPREGADO_GERENTE = "G";
 
 	public Empregado salvar(Empregado emp) {
-		String sql = " INSERT INTO EMPREGADO (NOME, CPF, SEXO "
-				+ " IDADE, SALARIOBRUTO, DESCONTOIR, DESCONTOPREVIDENCIA "
+		String sql = " INSERT INTO EMPREGADO (NOME, CPF, SEXO, "
+				+ " IDADE, SALARIOBRUTO, DESCONTOIR, DESCONTOPREVIDENCIA, "
 				+ " SALARIOBASE, SALARIO, COMISSAO, TIPO) "
 				+ " VALUES(?,?,?,?,?,?,?,?,?,?,?) ";
 		Connection conn = Banco.getConnection();
@@ -121,5 +121,28 @@ public class EmpregadoDAO implements BaseDAO<Empregado> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
+
+	public boolean temCPFCadastrado(String cpf) {
+		String sql = " SELECT ID FROM EMPREGADO E "
+				+ " WHERE E.CPF = " + cpf;
+		Connection conn = Banco.getConnection();
+		Statement stmt = Banco.getStatement(conn);
+
+		ResultSet rs = null;
+		boolean temCPFCadastrado = false;
+		try {
+			rs = stmt.executeQuery(sql);
+			temCPFCadastrado = rs.next();
+			
+		}catch (SQLException e) {
+			System.out.println("Erro ao verificar empregado por CPF " + cpf);
+			System.out.println("Erro: " + e.getMessage());
+		}finally {
+			Banco.closeResultSet(rs);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conn);
+		}
+		
+		return temCPFCadastrado;
+	}
 }

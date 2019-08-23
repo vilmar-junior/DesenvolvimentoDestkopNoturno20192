@@ -22,6 +22,11 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
+
+import controller.lista1.EmpregadoController;
+
+import java.awt.Font;
 
 public class TelaCadastroEmpregado {
 
@@ -72,60 +77,60 @@ public class TelaCadastroEmpregado {
 	private void initialize() {
 		frmCadastroDeEmpregado = new JFrame();
 		frmCadastroDeEmpregado.setTitle("Cadastro de empregado");
-		frmCadastroDeEmpregado.setBounds(100, 100, 224, 297);
+		frmCadastroDeEmpregado.setBounds(100, 100, 248, 297);
 		frmCadastroDeEmpregado.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmCadastroDeEmpregado.getContentPane().setLayout(null);
 		
 		lblNome = new JLabel("Nome:");
-		lblNome.setBounds(28, 32, 70, 14);
+		lblNome.setBounds(16, 32, 90, 14);
 		frmCadastroDeEmpregado.getContentPane().add(lblNome);
 		
 		lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(28, 57, 70, 14);
+		lblCpf.setBounds(16, 57, 90, 14);
 		frmCadastroDeEmpregado.getContentPane().add(lblCpf);
 		
 		lblIdade = new JLabel("Idade:");
-		lblIdade.setBounds(28, 82, 70, 14);
+		lblIdade.setBounds(16, 82, 90, 14);
 		frmCadastroDeEmpregado.getContentPane().add(lblIdade);
 		
 		lblSexo = new JLabel("Sexo:");
-		lblSexo.setBounds(28, 107, 70, 14);
+		lblSexo.setBounds(16, 107, 90, 14);
 		frmCadastroDeEmpregado.getContentPane().add(lblSexo);
 		
 		lblTipo = new JLabel("Tipo:");
-		lblTipo.setBounds(28, 132, 70, 14);
+		lblTipo.setBounds(16, 132, 90, 14);
 		frmCadastroDeEmpregado.getContentPane().add(lblTipo);
 		
-		lblSalarioBruto = new JLabel("Salário Bruto:");
-		lblSalarioBruto.setBounds(28, 157, 70, 14);
+		lblSalarioBruto = new JLabel("Salário Bruto (R$):");
+		lblSalarioBruto.setBounds(16, 157, 90, 14);
 		frmCadastroDeEmpregado.getContentPane().add(lblSalarioBruto);
 		
-		lblComissao = new JLabel("Comissão:");
-		lblComissao.setBounds(28, 182, 70, 14);
+		lblComissao = new JLabel("Comissão (R$):");
+		lblComissao.setBounds(16, 182, 90, 14);
 		lblComissao.setVisible(false);
 		frmCadastroDeEmpregado.getContentPane().add(lblComissao);
 		
 		txtNome = new JTextField();
-		txtNome.setBounds(101, 29, 86, 20);
+		txtNome.setBounds(116, 32, 101, 20);
 		frmCadastroDeEmpregado.getContentPane().add(txtNome);
 		txtNome.setColumns(10);
 		
 		txtCPF = new JTextField();
-		txtCPF.setBounds(101, 54, 86, 20);
+		txtCPF.setBounds(116, 57, 101, 20);
 		frmCadastroDeEmpregado.getContentPane().add(txtCPF);
 		txtCPF.setColumns(10);
 		
 		spnIdade = new JSpinner();
-		spnIdade.setBounds(101, 79, 86, 20);
+		spnIdade.setBounds(116, 82, 101, 20);
 		frmCadastroDeEmpregado.getContentPane().add(spnIdade);
 		
 		ButtonGroup group = new ButtonGroup();
 		rbMasculino = new JRadioButton("M");
-		rbMasculino.setBounds(98, 103, 41, 23);
+		rbMasculino.setBounds(128, 106, 41, 23);
 		frmCadastroDeEmpregado.getContentPane().add(rbMasculino);
 		
 		rbFeminino = new JRadioButton("F");
-		rbFeminino.setBounds(141, 103, 46, 23);
+		rbFeminino.setBounds(171, 106, 46, 23);
 		frmCadastroDeEmpregado.getContentPane().add(rbFeminino);
 
 		group.add(rbFeminino);
@@ -139,65 +144,66 @@ public class TelaCadastroEmpregado {
 			public void actionPerformed(ActionEvent arg0) {
 				String tipoSelecionado = (String) cbTipo.getSelectedItem();
 				if(tipoSelecionado.equals(EmpregadoDAO.DESCRICAO_TIPO_EMPREGADO_DIRETOR)) {
-					novoEmpregado = new Diretor();
 					txtComissao.setVisible(true);
 					lblComissao.setVisible(true);
 				}else if(tipoSelecionado.equals(EmpregadoDAO.DESCRICAO_TIPO_EMPREGADO_GERENTE)) {
-					novoEmpregado = new Gerente();
 					txtComissao.setVisible(true);
 					lblComissao.setVisible(true);
 				} else if(tipoSelecionado.equals(EmpregadoDAO.DESCRICAO_TIPO_EMPREGADO_OPERACIONAL)) {
-					novoEmpregado = new EmpregadoOperacional();
 					txtComissao.setVisible(false);
 					lblComissao.setVisible(false);
 					txtComissao.setText("");
 				} else {//"Selecione"
-					novoEmpregado = null;
 					txtComissao.setVisible(false);
 					txtComissao.setText("");
 					lblComissao.setVisible(false);
 				}
 			}
 		});
-		cbTipo.setBounds(101, 129, 86, 20);
+		cbTipo.setBounds(116, 132, 101, 20);
 		frmCadastroDeEmpregado.getContentPane().add(cbTipo);
 		
 		txtSalarioBruto = new JTextField();
-		txtSalarioBruto.setBounds(101, 154, 86, 20);
+		txtSalarioBruto.setBounds(116, 157, 101, 20);
 		frmCadastroDeEmpregado.getContentPane().add(txtSalarioBruto);
 		txtSalarioBruto.setColumns(10);
 		
 		txtComissao = new JTextField();
 		txtComissao.setVisible(false);
-		txtComissao.setBounds(101, 179, 86, 20);
+		txtComissao.setBounds(116, 182, 101, 20);
 		frmCadastroDeEmpregado.getContentPane().add(txtComissao);
 		txtComissao.setColumns(10);
 		
 		JButton btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(novoEmpregado == null) {
-					JOptionPane.showMessageDialog(null, "Selecione um tipo!", "Atenção!", JOptionPane.ERROR_MESSAGE);
-				}else {
-					novoEmpregado.setNome(txtNome.getText());
-					novoEmpregado.setCpf(txtCPF.getText());
-					novoEmpregado.setIdade((Integer) spnIdade.getValue());
-					
-					if(rbMasculino.isSelected()) {
-						novoEmpregado.setSexo('M');
-					}
-					
-					//TODO continuar na sexta...
+				char sexoSelecionado = ' ';
+				
+				if(rbMasculino.isSelected()) {
+					sexoSelecionado = 'M';
+				}else if(rbFeminino.isSelected()) {
+					sexoSelecionado = 'F';
 				}
 				
+				int idadeInteira = (Integer) spnIdade.getValue();
 				
-				//TODO é apenas um exemplo inicial
-				//JAMAIS CHAMEM DAOs NA TELA!!!
+				EmpregadoController controladora = new EmpregadoController();
 				
+				String mensagem = controladora.salvar(txtNome.getText(),txtCPF.getText(),sexoSelecionado,
+						idadeInteira, txtSalarioBruto.getText(),
+						(String) cbTipo.getSelectedItem(), txtComissao.getText()
+						);
 				
+				JOptionPane.showMessageDialog(null, mensagem);
 			}
 		});
-		btnSalvar.setBounds(28, 207, 159, 40);
+		btnSalvar.setBounds(16, 207, 201, 40);
 		frmCadastroDeEmpregado.getContentPane().add(btnSalvar);
+		
+		JLabel lblNovoEmpregado = new JLabel("Novo empregado");
+		lblNovoEmpregado.setFont(new Font("Tahoma", Font.BOLD, 12));
+		lblNovoEmpregado.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNovoEmpregado.setBounds(16, 0, 201, 32);
+		frmCadastroDeEmpregado.getContentPane().add(lblNovoEmpregado);
 	}
 }
