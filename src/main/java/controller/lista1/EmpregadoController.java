@@ -1,5 +1,7 @@
 package controller.lista1;
 
+import java.util.ArrayList;
+
 import model.bo.lista1.EmpregadoBO;
 import model.dao.lista1.EmpregadoDAO;
 import model.entity.lista1.Diretor;
@@ -15,6 +17,8 @@ import model.entity.lista1.Gerente;
  */
 public class EmpregadoController {
 
+	private EmpregadoBO bo = new EmpregadoBO();
+	
 	public EmpregadoController() {
 	}
 	
@@ -57,12 +61,20 @@ public class EmpregadoController {
 			novoEmpregado.setSexo(sexoSelecionado);
 			novoEmpregado.setSalarioBruto(salarioBrutoDouble);
 			
-			EmpregadoBO bo = new EmpregadoBO();
 			sb = new StringBuilder(bo.salvar(novoEmpregado));
 		}
 		
 		return sb.toString();
 	}
+	
+	public ArrayList<Empregado> consultarTodos(){
+		return bo.consultarTodos();
+	}
+	
+	public String excluir(Empregado empregado) {
+		return bo.excluir(empregado);
+	}
+	
 
 	private Empregado validarTipoEmpregado(String tipo, String comissao, StringBuilder sb) {
 		double comissaoDouble;
@@ -89,7 +101,7 @@ public class EmpregadoController {
 			sb.append("CPF deve conter 11 caracteres \n");
 		}else {
 			try {
-				Integer.parseInt(cpf);
+				Long.parseLong(cpf);
 			}catch(NumberFormatException ex) {
 				sb.append("CPF deve conter somente números \n");
 			}

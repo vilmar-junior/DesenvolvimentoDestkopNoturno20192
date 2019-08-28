@@ -69,8 +69,22 @@ public class EmpregadoDAO implements BaseDAO<Empregado> {
 	}
 
 	public boolean excluir(int id) {
-		// TODO Auto-generated method stub
-		return false;
+		Connection conexao = Banco.getConnection();
+		Statement statement = Banco.getStatement(conexao);
+		String sql = " DELETE FROM EMPREGADO WHERE ID = " + id;
+
+		int quantidadeRegistrosExcluidos = 0;
+		try {
+			quantidadeRegistrosExcluidos = statement.executeUpdate(sql);
+		} catch (SQLException e) {
+			System.out.println("Erro ao excluir empregado.");
+			System.out.println("Erro: " + e.getMessage());
+		}finally {
+			Banco.closePreparedStatement(statement);
+			Banco.closeConnection(conexao);
+		}
+
+		return quantidadeRegistrosExcluidos > 0;
 	}
 
 	public boolean alterar(Empregado entidade) {
@@ -118,9 +132,69 @@ public class EmpregadoDAO implements BaseDAO<Empregado> {
 	}
 
 	public ArrayList<Empregado> consultarTodos() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection conexao = Banco.getConnection();
+		String sql = " SELECT * FROM EMPREGADO";
+		ResultSet resultadoDaConsulta = null;
+		PreparedStatement stmt = Banco.getPreparedStatement(conexao, sql);
+		ArrayList<Empregado> empregados = new ArrayList<Empregado>();
+		
+		try {
+			resultadoDaConsulta = stmt.executeQuery();
+			while(resultadoDaConsulta.next()) {
+				Empregado empregadoBuscado = construirDoResultSet(resultadoDaConsulta);
+				empregados.add(empregadoBuscado);
+			}
+		}catch(SQLException ex) {
+			System.out.println("Erro ao consultar empregados cadastrados ");
+			System.out.println("Erro: " + ex.getMessage());
+		}finally {
+			Banco.closeResultSet(resultadoDaConsulta);
+			Banco.closePreparedStatement(stmt);
+			Banco.closeConnection(conexao);
+		}
+		
+		return empregados;
 	}
+
+	private Empregado construirDoResultSet(ResultSet rs) {
+		Empregado emp = null;
+		
+		try {
+			int id = rs.getInt("id");
+			String tipo = rs.getString("tipo");
+			String nome = rs.getString("nome");
+			String cpf = rs.getString("cpf");
+			int idade = rs.getInt("idade");
+			char sexo = rs.getString("sexo").charAt(0);
+			double salarioBruto = rs.getDouble("salarioBruto");
+			double comissao = rs.getDouble("comissao");
+			
+			switch (tipo) {
+				case TIPO_EMPREGADO_OPERACIONAL:
+					emp = new EmpregadoOperacional(nome, cpf, sexo, idade, salarioBruto);
+					break;
+				
+				case TIPO_EMPREGADO_GERENTE:
+					emp = new Gerente(nome, cpf, sexo, idade, salarioBruto, comissao);
+					break;
+					
+				case TIPO_EMPREGADO_DIRETOR:
+					emp = new Diretor(nome, cpf, sexo, idade, salarioBruto, comissao);
+					break;	
+			}
+			emp.setId(id);
+			
+			
+		} catch (SQLException e) {
+			System.out.println("Erro ao construir empregado do ResultSet ");
+			System.out.println("Erro: " + e.getMessage());
+		}
+		
+		return emp;
+	}
+	
+	
+	
 
 	public boolean temCPFCadastrado(String cpf) {
 		String sql = " SELECT ID FROM EMPREGADO E "
