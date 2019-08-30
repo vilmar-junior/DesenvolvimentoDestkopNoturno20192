@@ -42,5 +42,9 @@ ADD CONSTRAINT `id`
 ALTER TABLE `exemplos`.`telefone` 
 ADD COLUMN `idCliente` INT NULL AFTER `ativo`;
 
+INSERT INTO `endereco` (`id`,`cep`,`estado`,`cidade`,`bairro`,`numero`,`rua`) VALUES (1,'43294870','SC','Florianópolis','Centro','189','Novo 51');
+INSERT INTO `endereco` (`id`,`cep`,`estado`,`cidade`,`bairro`,`numero`,`rua`) VALUES (2,'38476242','SC','São José','Centro','515','Rua 79');
+
+
 
   
