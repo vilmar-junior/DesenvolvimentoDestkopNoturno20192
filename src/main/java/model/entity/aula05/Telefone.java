@@ -10,9 +10,19 @@ public class Telefone {
 	private boolean ativo;
 
 	public Telefone() {
-		
+
 	}
-	
+
+	public Telefone(Cliente cliente, String codigoPais, String ddd, String numero, String tipoLinha, boolean ativo) {
+		super();
+		this.cliente = cliente;
+		this.codigoPais = codigoPais;
+		this.ddd = ddd;
+		this.numero = numero;
+		this.tipoLinha = tipoLinha;
+		this.ativo = ativo;
+	}
+
 	public Telefone(int id, Cliente cliente, String codigoPais, String ddd, String numero, String tipoLinha,
 			boolean ativo) {
 		super();
@@ -67,8 +77,8 @@ public class Telefone {
 
 	@Override
 	public String toString() {
-		return " id: " + id + " |idCliente: " + cliente.getId() + "| +" + codigoPais + "(" + ddd + ")" + numero + " - Linha: " + tipoLinha + " "
-				+ (ativo ? "Ativa" : "Inativa");
+		return " id: " + id + " |idCliente: " + cliente.getId() + "| +" + codigoPais + "(" + ddd + ")" + numero
+				+ " - Linha: " + tipoLinha + " " + (ativo ? "Ativa" : "Inativa");
 	}
 
 	public int getId() {
