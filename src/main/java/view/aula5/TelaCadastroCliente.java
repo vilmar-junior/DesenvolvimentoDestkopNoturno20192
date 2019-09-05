@@ -29,6 +29,10 @@ import controller.aula05.TelefoneController;
 import model.entity.aula05.Cliente;
 import model.entity.aula05.Endereco;
 import model.entity.aula05.Telefone;
+import com.jgoodies.forms.layout.FormLayout;
+import com.jgoodies.forms.layout.ColumnSpec;
+import com.jgoodies.forms.layout.FormSpecs;
+import com.jgoodies.forms.layout.RowSpec;
 
 public class TelaCadastroCliente extends JFrame {
 
@@ -50,6 +54,7 @@ public class TelaCadastroCliente extends JFrame {
 	private String[] tipos = { TelefoneController.TIPO_TELEFONE_FIXO, TelefoneController.TIPO_TELEFONE_MOVEL };
 	private Cliente novoCliente = null;
 	private JButton btnAdicionarTelefone;
+	private JLabel lblNome;
 
 	/**
 	 * Launch the application.
@@ -77,29 +82,61 @@ public class TelaCadastroCliente extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(null);
+		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("70px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("3px"),
+				FormSpecs.RELATED_GAP_COLSPEC,
+				ColumnSpec.decode("21px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("40px"),
+				ColumnSpec.decode("5px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_COLSPEC,
+				ColumnSpec.decode("69px"),
+				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
+				ColumnSpec.decode("98px"),
+				ColumnSpec.decode("130px"),},
+			new RowSpec[] {
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("23px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("2px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("2px"),
+				FormSpecs.RELATED_GAP_ROWSPEC,
+				RowSpec.decode("20px"),
+				FormSpecs.UNRELATED_GAP_ROWSPEC,
+				RowSpec.decode("200px"),}));
 
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setBounds(10, 10, 50, 20);
-		contentPane.add(lblNome);
+		lblNome = new JLabel("Nome:");
+		contentPane.add(lblNome, "2, 2, fill, fill");
 
 		txtNome = new JTextField();
-		txtNome.setBounds(94, 10, 71, 20);
-		contentPane.add(txtNome);
+		contentPane.add(txtNome, "6, 2, 4, 1, fill, top");
 		txtNome.setColumns(10);
 
 		JLabel lblSobrenome = new JLabel("Sobrenome:");
-		lblSobrenome.setBounds(180, 10, 89, 20);
-		contentPane.add(lblSobrenome);
+		contentPane.add(lblSobrenome, "11, 2, 3, 1, fill, fill");
 
 		txtSobrenome = new JTextField();
-		txtSobrenome.setBounds(272, 10, 78, 20);
-		contentPane.add(txtSobrenome);
+		contentPane.add(txtSobrenome, "15, 2, left, top");
 		txtSobrenome.setColumns(10);
 
 		JLabel lblCpf = new JLabel("CPF:");
-		lblCpf.setBounds(370, 10, 50, 20);
-		contentPane.add(lblCpf);
+		contentPane.add(lblCpf, "16, 2, left, fill");
 
 		MaskFormatter mascaraCpf;
 		try {
@@ -107,34 +144,31 @@ public class TelaCadastroCliente extends JFrame {
 			txtCPF = new JFormattedTextField(mascaraCpf);
 		} catch (ParseException e) {
 		}
-		txtCPF.setBounds(400, 10, 100, 20);
-		contentPane.add(txtCPF);
+		contentPane.add(txtCPF, "16, 2, right, top");
 		txtCPF.setColumns(10);
 
 		JLabel lblEndereco = new JLabel("Endere\u00E7o:");
-		lblEndereco.setBounds(10, 43, 78, 14);
-		contentPane.add(lblEndereco);
+		contentPane.add(lblEndereco, "2, 4, 3, 1, fill, center");
 
 		JSeparator separator = new JSeparator();
-		separator.setBounds(10, 100, 490, 2);
-		contentPane.add(separator);
+		contentPane.add(separator, "2, 8, 15, 1, fill, top");
 
 		btnSalvar = new JButton("Salvar");
 		btnSalvar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				ClienteController cliController = new ClienteController();
+				ClienteController clienteController = new ClienteController();
 				String nomeDigitado = txtNome.getText();
 				String sobrenomeDigitado = txtSobrenome.getText();
 				String cpfDigitado = txtCPF.getText().replace("-", "").replace(".", "");
 				Endereco enderecoSelecionado = (Endereco) cbEndereco.getSelectedItem();
 
-				String mensagem = cliController.validarCamposSalvar(nomeDigitado, sobrenomeDigitado, cpfDigitado,
+				String mensagem = clienteController.validarCamposSalvar(nomeDigitado, sobrenomeDigitado, cpfDigitado,
 						enderecoSelecionado);
 
 				if (mensagem.isEmpty()) {
 					novoCliente = new Cliente(nomeDigitado, sobrenomeDigitado, cpfDigitado, new ArrayList<Telefone>(),
 							enderecoSelecionado);
-					novoCliente = cliController.salvar(novoCliente);
+					novoCliente = clienteController.salvar(novoCliente);
 
 					if (novoCliente.getId() > 0) {
 						btnAdicionarTelefone.setEnabled(true);
@@ -145,8 +179,7 @@ public class TelaCadastroCliente extends JFrame {
 				}
 			}
 		});
-		btnSalvar.setBounds(220, 70, 100, 23);
-		contentPane.add(btnSalvar);
+		contentPane.add(btnSalvar, "13, 6, 3, 1, center, top");
 
 		JLabel lblNovoTelefone = new JLabel("Novo telefone");
 		lblNovoTelefone.setForeground(Color.WHITE);
@@ -154,44 +187,35 @@ public class TelaCadastroCliente extends JFrame {
 		lblNovoTelefone.setOpaque(true);
 		lblNovoTelefone.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblNovoTelefone.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNovoTelefone.setBounds(10, 110, 490, 20);
-		contentPane.add(lblNovoTelefone);
+		contentPane.add(lblNovoTelefone, "2, 10, 15, 1, fill, fill");
 
 		JLabel lblCodigoPais = new JLabel("Cód. país:");
-		lblCodigoPais.setBounds(10, 140, 70, 20);
-		contentPane.add(lblCodigoPais);
+		contentPane.add(lblCodigoPais, "2, 12, fill, fill");
 
 		txtCodigoPais = new JTextField();
-		txtCodigoPais.setBounds(85, 140, 30, 20);
-		contentPane.add(txtCodigoPais);
+		contentPane.add(txtCodigoPais, "4, 12, 3, 1, fill, top");
 		txtCodigoPais.setColumns(10);
 
 		JLabel lblDdd = new JLabel("DDD:");
-		lblDdd.setBounds(120, 140, 40, 20);
-		contentPane.add(lblDdd);
+		contentPane.add(lblDdd, "8, 12, fill, fill");
 
 		txtDdd = new JTextField();
-		txtDdd.setBounds(160, 140, 30, 20);
-		contentPane.add(txtDdd);
+		contentPane.add(txtDdd, "9, 12, 3, 1, fill, top");
 		txtDdd.setColumns(10);
 
 		JLabel lblNumero = new JLabel("N\u00FAmero:");
-		lblNumero.setBounds(200, 140, 69, 20);
-		contentPane.add(lblNumero);
+		contentPane.add(lblNumero, "13, 12, fill, fill");
 
 		txtNumero = new JTextField();
-		txtNumero.setBounds(272, 140, 78, 20);
-		contentPane.add(txtNumero);
+		contentPane.add(txtNumero, "15, 12, left, top");
 		txtNumero.setColumns(10);
 
 		JLabel lblTipo = new JLabel("Tipo:");
-		lblTipo.setBounds(370, 140, 40, 20);
-		contentPane.add(lblTipo);
+		contentPane.add(lblTipo, "16, 12, left, fill");
 
 		cbTipo = new JComboBox(tipos);
-		cbTipo.setBounds(400, 140, 100, 20);
 		cbTipo.setSelectedIndex(-1);
-		contentPane.add(cbTipo);
+		contentPane.add(cbTipo, "16, 12, fill, top");
 
 		btnAdicionarTelefone = new JButton("Adicionar telefone");
 		btnAdicionarTelefone.addActionListener(new ActionListener() {
@@ -214,6 +238,7 @@ public class TelaCadastroCliente extends JFrame {
 					if (mensagemValidacao.isEmpty()) {
 						JOptionPane.showMessageDialog(null, "Telefone " + "adicionado", "Sucesso",
 								JOptionPane.INFORMATION_MESSAGE);
+						atualizarTabelaTelefones();
 					} else {
 						JOptionPane.showMessageDialog(null, mensagemValidacao, "Atenção", JOptionPane.WARNING_MESSAGE);
 					}
@@ -224,16 +249,13 @@ public class TelaCadastroCliente extends JFrame {
 			}
 		});
 		btnAdicionarTelefone.setEnabled(false);
-		btnAdicionarTelefone.setBounds(170, 170, 200, 20);
-		contentPane.add(btnAdicionarTelefone);
+		contentPane.add(btnAdicionarTelefone, "11, 14, 5, 1, fill, fill");
 
 		JSeparator separator_1 = new JSeparator();
-		separator_1.setBounds(10, 200, 490, 2);
-		contentPane.add(separator_1);
+		contentPane.add(separator_1, "2, 16, 15, 1, fill, top");
 
 		tblTelefones = new JTable();
-		tblTelefones.setBounds(10, 240, 490, 200);
-		contentPane.add(tblTelefones);
+		contentPane.add(tblTelefones, "2, 20, 15, 1, fill, fill");
 
 		limparTabela();
 
@@ -246,15 +268,13 @@ public class TelaCadastroCliente extends JFrame {
 
 		lblTelefonesCadastrados.setHorizontalAlignment(SwingConstants.CENTER);
 		lblTelefonesCadastrados.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblTelefonesCadastrados.setBounds(10, 208, 490, 20);
-		contentPane.add(lblTelefonesCadastrados);
+		contentPane.add(lblTelefonesCadastrados, "2, 18, 15, 1, fill, fill");
 
 		// C�digo do construtor da tela
 		consultarEnderecos();
 		cbEndereco = new JComboBox(todosOsEnderecos.toArray());
-		cbEndereco.setBounds(94, 40, 406, 20);
 		cbEndereco.setSelectedIndex(-1);
-		contentPane.add(cbEndereco);
+		contentPane.add(cbEndereco, "6, 4, 11, 1, fill, top");
 	}
 
 	private void consultarEnderecos() {

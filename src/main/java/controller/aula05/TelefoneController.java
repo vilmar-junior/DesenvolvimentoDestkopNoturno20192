@@ -23,20 +23,25 @@ public class TelefoneController {
 	public String validarNovoTelefone(String codigoPais, String ddd, String numero, String tipoLinha) {
 		String mensagem = "";
 
-		if (codigoPais.isEmpty() || codigoPais.trim().length() != 2) {
-			mensagem += "Código do país deve possuir 2 números \n";
-		}
-
-		if (ddd.isEmpty() || codigoPais.trim().length() != 2) {
-			mensagem += "DDD deve possuir 2 números \n";
-		}
-
-		if (numero.isEmpty() || numero.trim().length() != 11) {
-			mensagem += "Número deve possuir de 8 a 12 números \n";
-		}
-
-		if (tipoLinha.isEmpty()) {
+		mensagem += validarString(codigoPais, "Código do país", 2, 2);
+		mensagem += validarString(ddd, "DDD", 2, 2);
+		mensagem += validarString(numero, "Número", 8, 12);
+		
+		if (tipoLinha == null || tipoLinha.isEmpty()) {
 			mensagem += "Informe o tipo da linha \n";
+		}
+
+		return mensagem;
+	}
+
+	private String validarString(String valorDigitado, String nomeDoValor, int tamanhoMinimoAceito, 
+			int tamanhoMaximoAceito) {
+
+		String mensagem = "";
+		if (valorDigitado.isEmpty() || valorDigitado.trim().length() < tamanhoMinimoAceito
+				||  valorDigitado.trim().length() > tamanhoMaximoAceito) {
+			mensagem += nomeDoValor + " deve possuir de " +  tamanhoMinimoAceito
+					+ " a " + tamanhoMaximoAceito + " caracteres \n";
 		}
 
 		return mensagem;
