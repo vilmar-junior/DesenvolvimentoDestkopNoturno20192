@@ -1,4 +1,4 @@
-package view.painel.exemplos;
+package view.painel.exemplos.aula10;
 
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;

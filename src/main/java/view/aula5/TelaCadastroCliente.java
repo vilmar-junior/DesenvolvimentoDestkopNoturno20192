@@ -23,16 +23,17 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
 
+import com.privatejgoodies.forms.layout.ColumnSpec;
+import com.privatejgoodies.forms.layout.FormLayout;
+import com.privatejgoodies.forms.layout.FormSpecs;
+import com.privatejgoodies.forms.layout.RowSpec;
+
 import controller.aula05.ClienteController;
 import controller.aula05.EnderecoController;
 import controller.aula05.TelefoneController;
 import model.entity.aula05.Cliente;
 import model.entity.aula05.Endereco;
 import model.entity.aula05.Telefone;
-import com.jgoodies.forms.layout.FormLayout;
-import com.jgoodies.forms.layout.ColumnSpec;
-import com.jgoodies.forms.layout.FormSpecs;
-import com.jgoodies.forms.layout.RowSpec;
 
 public class TelaCadastroCliente extends JFrame {
 
@@ -82,44 +83,20 @@ public class TelaCadastroCliente extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
-		contentPane.setLayout(new FormLayout(new ColumnSpec[] {
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("70px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("3px"),
-				FormSpecs.RELATED_GAP_COLSPEC,
-				ColumnSpec.decode("21px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("40px"),
-				ColumnSpec.decode("5px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_COLSPEC,
-				ColumnSpec.decode("69px"),
-				FormSpecs.LABEL_COMPONENT_GAP_COLSPEC,
-				ColumnSpec.decode("98px"),
-				ColumnSpec.decode("130px"),},
-			new RowSpec[] {
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("23px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("2px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("2px"),
-				FormSpecs.RELATED_GAP_ROWSPEC,
-				RowSpec.decode("20px"),
-				FormSpecs.UNRELATED_GAP_ROWSPEC,
-				RowSpec.decode("200px"),}));
+		contentPane.setLayout(new FormLayout(
+				new ColumnSpec[] { FormSpecs.UNRELATED_GAP_COLSPEC, ColumnSpec.decode("70px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("3px"), FormSpecs.RELATED_GAP_COLSPEC,
+						ColumnSpec.decode("21px"), FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("40px"),
+						ColumnSpec.decode("5px"), FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("20px"),
+						FormSpecs.UNRELATED_GAP_COLSPEC, ColumnSpec.decode("69px"),
+						FormSpecs.LABEL_COMPONENT_GAP_COLSPEC, ColumnSpec.decode("98px"), ColumnSpec.decode("130px"), },
+				new RowSpec[] { FormSpecs.UNRELATED_GAP_ROWSPEC, RowSpec.decode("20px"),
+						FormSpecs.UNRELATED_GAP_ROWSPEC, RowSpec.decode("20px"), FormSpecs.UNRELATED_GAP_ROWSPEC,
+						RowSpec.decode("23px"), FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("2px"),
+						FormSpecs.RELATED_GAP_ROWSPEC, RowSpec.decode("20px"), FormSpecs.UNRELATED_GAP_ROWSPEC,
+						RowSpec.decode("20px"), FormSpecs.UNRELATED_GAP_ROWSPEC, RowSpec.decode("20px"),
+						FormSpecs.UNRELATED_GAP_ROWSPEC, RowSpec.decode("2px"), FormSpecs.RELATED_GAP_ROWSPEC,
+						RowSpec.decode("20px"), FormSpecs.UNRELATED_GAP_ROWSPEC, RowSpec.decode("200px"), }));
 
 		lblNome = new JLabel("Nome:");
 		contentPane.add(lblNome, "2, 2, fill, fill");
