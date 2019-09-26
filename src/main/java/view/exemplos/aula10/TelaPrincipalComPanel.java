@@ -17,6 +17,7 @@ import javax.swing.KeyStroke;
 import javax.swing.border.EmptyBorder;
 
 import view.painel.exemplos.aula10.PanelListagemClientes;
+import java.awt.event.InputEvent;
 
 /**
  * Exemplo de menu com componentes do tipo JPanel (Aula 10)
@@ -46,7 +47,7 @@ public class TelaPrincipalComPanel extends JFrame {
 
 	public TelaPrincipalComPanel() {
 		setIconImage(Toolkit.getDefaultToolkit()
-				.getImage(TelaPrincipalComPanel.class.getResource("/icones/icons8-сharlie-сhaplin.png")));
+				.getImage(TelaPrincipalComPanel.class.getResource("/icons/icons8-сharlie-сhaplin.png")));
 		setTitle("Tela Principal");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -55,21 +56,21 @@ public class TelaPrincipalComPanel extends JFrame {
 		setJMenuBar(mbPrincipal);
 
 		JMenu mnProdutos = new JMenu("Produtos");
-		mnProdutos.setIcon(new ImageIcon(TelaPrincipalComPanel.class.getResource("/icones/icons8-comprar.png")));
+		mnProdutos.setIcon(new ImageIcon(TelaPrincipalComPanel.class.getResource("/icons/icons8-comprar.png")));
 		mbPrincipal.add(mnProdutos);
 
 		JMenuItem mntmCadastrarProduto = new JMenuItem("Cadastrar");
-		mntmCadastrarProduto.setIcon(new ImageIcon(
-				TelaPrincipalComPanel.class.getResource("/icones/icons8-adicionar-usuário-masculino.png")));
+		mntmCadastrarProduto.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_MASK));
+		mntmCadastrarProduto.setIcon(new ImageIcon(TelaPrincipalComPanel.class.getResource("/icons/icons8-lista-com-marcadores.png")));
 		mnProdutos.add(mntmCadastrarProduto);
 
 		JMenuItem mntmListar = new JMenuItem("Listar");
 		mntmListar.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F2, 0));
-		mntmListar.setIcon(new ImageIcon(TelaPrincipalComPanel.class.getResource("/icones/icons8-cardápio.png")));
+		mntmListar.setIcon(new ImageIcon(TelaPrincipalComPanel.class.getResource("/icons/icons8-cardápio.png")));
 		mnProdutos.add(mntmListar);
 
 		JMenu mnClientes = new JMenu("Clientes");
-		mnClientes.setIcon(new ImageIcon(TelaPrincipalComPanel.class.getResource("/icones/icons8-usuário.png")));
+		mnClientes.setIcon(new ImageIcon(TelaPrincipalComPanel.class.getResource("/icons/icons8-usuário.png")));
 		mbPrincipal.add(mnClientes);
 
 		JMenuItem mntmCadastrarCliente = new JMenuItem("Cadastrar");
@@ -91,9 +92,9 @@ public class TelaPrincipalComPanel extends JFrame {
 				setContentPane(telaListagemClientes);
 			}
 		});
-		mntmCadastrarCliente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F4, 0));
+		mntmCadastrarCliente.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_F1, 0));
 		mntmCadastrarCliente.setIcon(new ImageIcon(
-				TelaPrincipalComPanel.class.getResource("/icones/icons8-adicionar-usuário-masculino.png")));
+				TelaPrincipalComPanel.class.getResource("/icons/icons8-adicionar-usuário-masculino.png")));
 		mnClientes.add(mntmCadastrarCliente);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
