@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Date;
 
@@ -44,7 +45,7 @@ public class TelaComDatas {
 	 */
 	private void initialize() {
 		frame = new JFrame();
-		frame.setBounds(100, 100, 450, 300);
+		frame.setBounds(100, 100, 450, 219);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 
@@ -60,15 +61,18 @@ public class TelaComDatas {
 		dataTeste.setBounds(80, 60, 300, 30);
 		frame.getContentPane().add(dataTeste);
 
-		JButton btnPegarData = new JButton("Criar data (java.util.Date)");
+		JButton btnPegarData = new JButton("Criar data");
 		btnPegarData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				// Atributos próprios do componente datePicker (date e time)
 				LocalDate dataSelecionada = dataTeste.getDatePicker().getDate();
 				LocalTime horaSelecionada = dataTeste.getTimePicker().getTime();
+				
+				LocalDateTime dataComHora = LocalDateTime.of(dataSelecionada, horaSelecionada);
 
 				JOptionPane.showMessageDialog(null, "Data selecionada: " + dataSelecionada.toString());
 				JOptionPane.showMessageDialog(null, "Horário selecionado: " + horaSelecionada.toString());
+				JOptionPane.showMessageDialog(null, "Data e hora selecionada: " + dataComHora.toString());
 
 				// Preenche uma data utilizando os dois campos do componente
 				Date dataCompleta = new Date(dataSelecionada.getYear(), dataSelecionada.getMonthValue(),
